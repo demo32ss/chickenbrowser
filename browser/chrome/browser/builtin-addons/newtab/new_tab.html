@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Yeni Pəncərə - Chicken Web</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0; padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+  color: #222222;
+  display: flex; flex-direction: column; align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+header {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.2rem;
+  color: #222222;
+  text-shadow: none;
+}
+header p {
+  font-size: 1.2rem;
+  margin-top: 0;
+  color: #555555;
+}
+
+#datetime {
+  margin: 1rem 0 2rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #444444;
+  text-shadow: none;
+}
+
+/* Arama kutusu */
+form#search-form {
+  width: 90%; max-width: 600px;
+  display: flex;
+  margin-bottom: 2rem;
+}
+form#search-form input[type="text"] {
+  flex-grow: 1;
+  padding: 0.8rem 1rem;
+  font-size: 1.1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  background: white;
+  color: #222;
+}
+form#search-form button {
+  background-color: #3a6df0;
+  border: none;
+  color: white;
+  padding: 0 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  transition: background-color 0.3s ease;
+}
+form#search-form button:hover {
+  background-color: #2a52c7;
+}
+
+/* Favori siteler */
+#favorites {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 700px;
+  margin-bottom: 3rem;
+}
+.fav-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: none;
+  border-radius: 12px;
+  width: 140px;
+  height: 140px;
+  text-align: center;
+  padding: 1rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  color: #222222;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+.fav-card:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 1);
+}
+.fav-card img {
+  max-width: 40px;
+  margin: 0 auto 0.6rem;
+}
+
+/* Not defteri */
+#notes-container {
+  width: 90%; max-width: 600px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: none;
+  border-radius: 14px;
+  padding: 1.2rem;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+  color: #222222;
+}
+#notes-container h2 {
+  margin-top: 0; margin-bottom: 0.8rem;
+  color: #222222;
+  text-shadow: none;
+}
+#note {
+  width: 100%;
+  height: 120px;
+  font-size: 1rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: none;
+  font-family: 'Inter', sans-serif;
+  color: #222;
+  background: white;
+}
+#note:focus {
+  outline: 2px solid #3a6df0;
+}
+
+/* Footer */
+footer {
+  margin: 3rem 0 1rem;
+  color: #555555;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .fav-card {
+    width: 100px; height: 100px;
+    font-size: 0.9rem;
+  }
+  header h1 {
+    font-size: 2rem;
+  }
+  #datetime {
+    font-size: 1rem;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Salam, xoş gəlmisiniz!</h1>
+  <p>Chicken Veb-brauzerinizdə Yeni Pəncərə</p>
+  <div id="datetime">Tarix və Saat yüklənir...</div>
+</header>
+
+<form id="search-form" action="https://www.google.com/search" method="GET" target="_blank" role="search" aria-label="Google axtarışı">
+  <input type="text" name="q" placeholder="Google-də axtar ..." autocomplete="off" required />
+  <button type="submit" aria-label="Axtar">Axtar</button>
+</form>
+
+<section id="favorites" aria-label="Favori saytlar">
+  <a href="https://www.google.com" target="_blank" class="fav-card" aria-label="Google">
+    <img src="https://www.google.com/favicon.ico" alt="Google loqosu" />
+    Google
+  </a>
+  <a href="https://www.youtube.com" target="_blank" class="fav-card" aria-label="YouTube">
+    <img src="https://www.youtube.com/favicon.ico" alt="YouTube loqosu" />
+    YouTube
+  </a>
+  <a href="https://www.facebook.com" target="_blank" class="fav-card" aria-label="Facebook">
+    <img src="https://www.facebook.com/favicon.ico" alt="Facebook loqosu" />
+    Facebook
+  </a>
+  <a href="https://twitter.com" target="_blank" class="fav-card" aria-label="Twitter">
+    <img src="https://twitter.com/favicon.ico" alt="Twitter loqosu" />
+    Twitter
+  </a>
+</section>
+
+<section id="notes-container" aria-label="Not defteri">
+  <h2>Şəxsi qeydləriniz</h2>
+  <textarea id="note" placeholder="Buraya notlarınızı yazın..."></textarea>
+</section>
+
+<footer>© 2025 Demirlik LLC</footer>
+<div id="settings-panel" style="max-width:600px; margin:2rem auto; font-family:sans-serif; background:#f9f9f9; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1); padding:1.5rem; color:#222;">
+  <h2 style="margin-top:0; margin-bottom:1rem;">Chicken Web - Ayarlar</h2>
+
+  <!-- Tema -->
+  <div style="margin-bottom:1rem;">
+    <label style="display:flex; align-items:center; cursor:pointer; user-select:none;">
+      <input type="checkbox" id="toggle-light-theme" style="margin-right:0.5rem;" />
+      Açıq rejimi aktivləşdir.
+    </label>
+  </div>
+
+  <!-- Varsayılan Tarayıcı -->
+  <div style="margin-bottom:1rem;">
+    <button id="set-default-browser" style="padding:0.5rem 1rem; background:#3a6df0; border:none; color:#fff; border-radius:5px; cursor:pointer;">
+      Defolt Brauzer et.
+    </button>
+    <p id="default-browser-msg" style="margin:0.5rem 0 0; color:green; display:none;">Başarılı: Chicken Web varsayılan tarayıcı yapıldı!</p>
+  </div>
+
+  <!-- Ayarlarda Arama -->
+  <div style="margin-bottom:1rem;">
+    <input type="search" id="settings-search" placeholder="Parametrlər içində axtar..." style="width:100%; padding:0.5rem; border-radius:5px; border:1px solid #ccc;" />
+    <ul id="search-results" style="list-style:none; padding-left:0; margin-top:0.5rem; max-height:100px; overflow-y:auto; border:1px solid #ddd; border-radius:5px; display:none; background:#fff;">
+      <!-- Arama sonuçları JS ile doldurulacak -->
+    </ul>
+  </div>
+
+  <!-- Şifre Yöneticisi -->
+  <div style="margin-bottom:1rem;">
+    <button id="open-password-manager" style="padding:0.5rem 1rem; background:#5a43a6; border:none; color:#fff; border-radius:5px; cursor:pointer;">
+      Parol idarə edicisini aç.
+    </button>
+  </div>
+
+  <!-- Diğer ayarlar -->
+  <div>
+    <button style="padding:0.5rem 1rem; background:#777; border:none; color:#fff; border-radius:5px; cursor:pointer; margin-right:0.5rem;">Gizlilik Ayarları</button>
+    <button style="padding:0.5rem 1rem; background:#777; border:none; color:#fff; border-radius:5px; cursor:pointer;">Bildirimler</button>
+  </div>
+</div>
+
+<script>
+  // Tema Toggle & localStorage
+  const toggle = document.getElementById('toggle-light-theme');
+  const STORAGE_KEY = 'chickenweb_light_theme_enabled';
+
+  function applyLightTheme(enabled) {
+    if (enabled) {
+      document.body.style.background = 'linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%)';
+      document.body.style.color = '#222';
+    } else {
+      document.body.style.background = '';
+      document.body.style.color = '';
+    }
+  }
+
+  toggle.addEventListener('change', () => {
+    localStorage.setItem(STORAGE_KEY, toggle.checked ? 'true' : 'false');
+    applyLightTheme(toggle.checked);
+  });
+
+  const saved = localStorage.getItem(STORAGE_KEY);
+  const enabled = saved === 'true';
+  toggle.checked = enabled;
+  applyLightTheme(enabled);
+
+  // Varsayılan tarayıcı simülasyonu
+  document.getElementById('set-default-browser').addEventListener('click', () => {
+    // Gerçek tarayıcı ayarı yapılamaz, simülasyon mesajı göster
+    const msg = document.getElementById('default-browser-msg');
+    msg.style.display = 'block';
+    setTimeout(() => { msg.style.display = 'none'; }, 3000);
+  });
+
+  // Ayarlar içinde arama - basit filtreleme
+  const settingsSearch = document.getElementById('settings-search');
+  const searchResults = document.getElementById('search-results');
+
+  const settingsItems = [
+    'Açıq rejimi aktivləşdir.',
+    'Defolt Brauzer et.',
+    'Parol idarə edicisini aç.',
+    'Gizlilik Səhifəsi',
+    'Bildirişlər'
+  ];
+
+  settingsSearch.addEventListener('input', () => {
+    const query = settingsSearch.value.toLowerCase();
+    if (!query) {
+      searchResults.style.display = 'none';
+      searchResults.innerHTML = '';
+      return;
+    }
+    const matched = settingsItems.filter(item => item.toLowerCase().includes(query));
+    if (matched.length === 0) {
+      searchResults.innerHTML = '<li style="padding:0.5rem;">Sonuç bulunamadı.</li>';
+    } else {
+      searchResults.innerHTML = matched.map(item => `<li style="padding:0.5rem; border-bottom:1px solid #eee;">${item}</li>`).join('');
+    }
+    searchResults.style.display = 'block';
+  });
+
+  // Şifre yöneticisi butonu simülasyonu
+  document.getElementById('open-password-manager').addEventListener('click', () => {
+    alert('Şifre yöneticisi özelliği henüz aktif değil.');
+  });
+</script>
+
+<script>
+  // Tarix və saat göstər
+  function updateDateTime() {
+    const dtElem = document.getElementById('datetime');
+    const now = new Date();
+
+    // Ay və gün üçün Azərbaycan dilində adlar
+    const aylar = ["Yanvar", "Fevral", "Mart", "Aprel", "May", "İyun", "İyul", "Avqust", "Sentyabr", "Oktyabr", "Noyabr", "Dekabr"];
+    const gunler = ["Bazar", "Bazar ertəsi", "Çərşənbə axşamı", "Çərşənbə", "Cümə axşamı", "Cümə", "Şənbə"];
+
+    const gunAdi = gunler[now.getDay()];
+    const ayAdi = aylar[now.getMonth()];
+    const tarix = `${gunAdi}, ${now.getDate()} ${ayAdi} ${now.getFullYear()}`;
+
+    let saat = now.getHours().toString().padStart(2, '0');
+    let deqiqe = now.getMinutes().toString().padStart(2, '0');
+    let saniye = now.getSeconds().toString().padStart(2, '0');
+
+    dtElem.textContent = `Bu gün: ${tarix} — Saat: ${saat}:${deqiqe}:${saniye}`;
+  }
+  setInterval(updateDateTime, 1000);
+  updateDateTime();
+
+  // Not defterini localStorage ile saxlamaq
+  const noteElem = document.getElementById('note');
+
+  // Yüklə
+  noteElem.value = localStorage.getItem(STORAGE_KEY) || '';
+
+  // Dəyişiklik olduqda saxla
+  noteElem.addEventListener('input', () => {
+    localStorage.setItem(STORAGE_KEY, noteElem.value);
+  });
+</script>
+
+</body>
+</html>

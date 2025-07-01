@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chicken Parametrləri</title>
+  <style>
+    /* Açıq tema üçün üslub */
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7fa;
+      color: #202020;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #1a73e8;
+      border-bottom: 2px solid #1a73e8;
+      padding-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 600;
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+      transform: scale(1.2);
+      vertical-align: middle;
+    }
+    input[type="range"] {
+      width: 250px;
+    }
+    select, input[type="text"] {
+      padding: 6px;
+      font-size: 1em;
+      width: 260px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #fff;
+      color: #202020;
+    }
+    button {
+      margin-top: 25px;
+      padding: 10px 20px;
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #155ab6;
+    }
+    .info {
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Chicken Parametrləri</h1>
+
+  <form id="settingsForm">
+
+    <label>
+      <input type="checkbox" id="sendTelemetry" />
+      Telemetri məlumatlarını göndərmək
+    </label>
+    <div class="info">Firefox istifadə təcrübəsini yaxşılaşdırmaq üçün anonim məlumatları göndərir.</div>
+
+    <label for="homepage">Başlanğıc səhifə ünvanı:</label>
+    <input type="text" id="homepage" placeholder="Məsələn: https://www.mozilla.org" />
+
+    <label for="searchEngine">Axtarış mühərriki seçin:</label>
+    <select id="searchEngine">
+      <option value="google">Google</option>
+      <option value="bing">Bing</option>
+      <option value="duckduckgo">DuckDuckGo</option>
+      <option value="yandex">Yandex</option>
+    </select>
+
+    <label for="fontSize">Şrift ölçüsü:</label>
+    <input type="range" id="fontSize" min="12" max="24" value="16" />
+    <div class="info" id="fontSizeValue">16 px</div>
+
+    <button type="button" onclick="saveSettings()">Saxla</button>
+
+  </form>
+
+  <script>
+    // Form elementləri
+    const sendTelemetry = document.getElementById('sendTelemetry');
+    const homepage = document.getElementById('homepage');
+    const searchEngine = document.getElementById('searchEngine');
+    const fontSize = document.getElementById('fontSize');
+    const fontSizeValue = document.getElementById('fontSizeValue');
+
+    // Yükləyərkən yaddaşdan dəyərləri al (localStorage nümunəsi)
+    window.onload = () => {
+      if(localStorage.getItem('sendTelemetry') === 'true') {
+        sendTelemetry.checked = true;
+      }
+      if(localStorage.getItem('homepage')) {
+        homepage.value = localStorage.getItem('homepage');
+      }
+      if(localStorage.getItem('searchEngine')) {
+        searchEngine.value = localStorage.getItem('searchEngine');
+      }
+      if(localStorage.getItem('fontSize')) {
+        fontSize.value = localStorage.getItem('fontSize');
+        fontSizeValue.textContent = fontSize.value + " px";
+        document.body.style.fontSize = fontSize.value + "px";
+      }
+    };
+
+    // Font ölçüsünü göstər
+    fontSize.addEventListener('input', () => {
+      fontSizeValue.textContent = fontSize.value + " px";
+      document.body.style.fontSize = fontSize.value + "px";
+    });
+
+    // Dəyərləri yaddaşa yaz
+    function saveSettings() {
+      localStorage.setItem('sendTelemetry', sendTelemetry.checked);
+      localStorage.setItem('homepage', homepage.value);
+      localStorage.setItem('searchEngine', searchEngine.value);
+      localStorage.setItem('fontSize', fontSize.value);
+
+      alert('Ayarlar saxlanıldı!');
+    }
+  </script>
+
+</body>
+</html>
